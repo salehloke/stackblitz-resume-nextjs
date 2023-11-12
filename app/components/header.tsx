@@ -4,7 +4,7 @@ import profilePics from "../../public/saleh-avatar.JPG"
 
 const ResumeHeader = () => {
     return (
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto p-5">
             <div className="flex">
                 <div className="flex-1 p-2">
                     {/* AVATAR */}
