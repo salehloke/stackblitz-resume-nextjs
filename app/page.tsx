@@ -2,6 +2,8 @@ import Image from 'next/image'
 import ResumeHeader from './components/header'
 import ResumeIntro from './components/intro'
 import Resume from './components/resume'
+import ResumeStyle2 from './components/resume-style-2'
+import ResumeStyle3 from './components/resume-style-3'
 
 
 const resumeData = {
@@ -98,7 +100,9 @@ export default function Home() {
 
       </div>
       <ResumeIntro /> */}
-      <Resume data={resumeData}  />
+      {/* <Resume data={resumeData}  /> */}
+      {/* <ResumeStyle2 data={resumeData}  /> */}
+      <ResumeStyle3 data={resumeData}  />
     </main>
   )
 }
