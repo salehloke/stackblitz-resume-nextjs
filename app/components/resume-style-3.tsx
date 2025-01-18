@@ -77,6 +77,7 @@ const Resume: React.FC<ResumeProps> = ({ data }) => {
     const reactToPrintFn = useReactToPrint({
       contentRef: contentRef,
       documentTitle: `${data.contactInformation.fullName}_Resume`,
+      
     });
 
   return (

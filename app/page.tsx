@@ -4,6 +4,7 @@ import ResumeIntro from './components/intro'
 import Resume from './components/resume'
 import ResumeStyle2 from './components/resume-style-2'
 import ResumeStyle3 from './components/resume-style-3'
+import 'tailwindcss/tailwind.css';
 
 
 const resumeData = {
@@ -102,7 +103,11 @@ export default function Home() {
       <ResumeIntro /> */}
       {/* <Resume data={resumeData}  /> */}
       {/* <ResumeStyle2 data={resumeData}  /> */}
-      <ResumeStyle3 data={resumeData}  />
+      <div className="print:p-4 print:bg-white print:text-black">
+        <ResumeStyle3 data={resumeData} />
+        {/* Your content */}
+      </div>
+
     </main>
   )
 }
