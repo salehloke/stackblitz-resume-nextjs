@@ -2,43 +2,33 @@
 
 import { useForm, useFieldArray } from 'react-hook-form';
 import { ResumeData } from '../types/resume';
+import { useResume } from '../context/ResumeContext';
+import { useEffect } from 'react';
 
 export default function EditResume() {
-  const { register, control, handleSubmit, formState: { errors } } = useForm<ResumeData>({
-    defaultValues: {
-      personalInfo: {
-        name: "John Doe",
-        title: "Full Stack Developer",
-        email: "john@example.com",
-        phone: "+1 234 567 8900",
-        location: "San Francisco, CA",
-        summary: "Experienced full stack developer with a passion for building scalable web applications."
-      },
-      experience: [
-        {
-          company: "Tech Corp",
-          position: "Senior Developer",
-          startDate: "2020-01",
-          endDate: "Present",
-          description: "Led development of multiple web applications using React and Node.js."
-        }
-      ],
-      education: [
-        {
-          school: "University of Technology",
-          degree: "Bachelor's",
-          field: "Computer Science",
-          graduationDate: "2019"
-        }
-      ],
-      skills: [
-        {
-          category: "Programming Languages",
-          items: ["JavaScript", "TypeScript", "Python"]
-        }
-      ]
-    }
+  const { resumeData, updateResume, isDirty, setIsDirty } = useResume();
+  
+  const { register, control, handleSubmit, watch, formState: { errors } } = useForm<ResumeData>({
+    defaultValues: resumeData
   });
+
+  const formValues = watch();
+
+  // Auto-save form changes to localStorage
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      if (isDirty) {
+        updateResume(formValues);
+      }
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [formValues, isDirty, updateResume]);
+
+  // Mark form as dirty when changes are made
+  useEffect(() => {
+    setIsDirty(true);
+  }, [formValues, setIsDirty]);
 
   const { fields: expFields, append: appendExp, remove: removeExp } = useFieldArray({
     control,
@@ -56,15 +46,22 @@ export default function EditResume() {
   });
 
   const onSubmit = (data: ResumeData) => {
-    console.log(data);
-    // Here you would typically save the data to your backend
+    updateResume(data);
     alert('Resume saved successfully!');
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="max-w-4xl mx-auto p-6">
       <div className="bg-white shadow-lg rounded-lg p-6 mb-6">
-        <h2 className="text-2xl font-bold mb-6">Personal Information</h2>
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl font-bold">Personal Information</h2>
+          {isDirty && (
+            <span className="text-yellow-600 text-sm">
+              Auto-saving...
+            </span>
+          )}
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
           <div>
             <label className="block text-sm font-medium mb-1">Name</label>
@@ -230,9 +227,12 @@ export default function EditResume() {
               />
               <label className="block text-sm font-medium mb-1">Skills (comma-separated)</label>
               <input
-                {...register(`skills.${index}.items`)}
+                {...register(`skills.${index}.items`, {
+                  setValueAs: (value: string) => value.split(',').map(item => item.trim()).filter(Boolean)
+                })}
                 className="w-full p-2 border rounded"
                 placeholder="e.g., JavaScript, TypeScript, React"
+                defaultValue={formValues.skills[index]?.items?.join(', ') || ''}
               />
             </div>
             <button
