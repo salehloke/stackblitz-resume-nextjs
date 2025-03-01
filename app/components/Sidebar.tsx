@@ -10,6 +10,7 @@ interface SidebarProps {
 
 const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
   const menuItems = [
+    { label: 'Home', path: '/' },
     { label: 'View Resume', path: '/view' },
     { label: 'Edit Resume', path: '/edit' },
   ];

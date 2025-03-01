@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useContext, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import { ResumeData } from '../types/resume';
 import { useLocalStorage } from '../hooks/useLocalStorage';
 
@@ -48,11 +48,19 @@ interface ResumeContextType {
 const ResumeContext = createContext<ResumeContextType | undefined>(undefined);
 
 export function ResumeProvider({ children }: { children: React.ReactNode }) {
+  const [isInitialized, setIsInitialized] = useState(false);
   const [resumeData, setResumeData] = useLocalStorage<ResumeData>('resumeData', defaultResumeData);
   const [isDirty, setIsDirty] = useLocalStorage<boolean>('resumeIsDirty', false);
 
+  // Initialize the context after mounting
+  useEffect(() => {
+    setIsInitialized(true);
+  }, []);
+
   // Handle beforeunload event to warn user about unsaved changes
   useEffect(() => {
+    if (!isInitialized) return;
+
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
       if (isDirty) {
         const message = 'You have unsaved changes. Are you sure you want to leave?';
@@ -63,24 +71,60 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
 
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => window.removeEventListener('beforeunload', handleBeforeUnload);
-  }, [isDirty]);
+  }, [isDirty, isInitialized]);
 
-  // Ensure skills.items is always an array
-  const updateResume = (data: ResumeData) => {
-    const sanitizedData = {
-      ...data,
+  // Validate and sanitize resume data
+  const validateResumeData = (data: ResumeData): ResumeData => {
+    return {
+      personalInfo: {
+        name: data.personalInfo?.name || '',
+        title: data.personalInfo?.title || '',
+        email: data.personalInfo?.email || '',
+        phone: data.personalInfo?.phone || '',
+        location: data.personalInfo?.location || '',
+        summary: data.personalInfo?.summary || ''
+      },
+      experience: (data.experience || []).map(exp => ({
+        company: exp.company || '',
+        position: exp.position || '',
+        startDate: exp.startDate || '',
+        endDate: exp.endDate || '',
+        description: exp.description || ''
+      })),
+      education: (data.education || []).map(edu => ({
+        school: edu.school || '',
+        degree: edu.degree || '',
+        field: edu.field || '',
+        graduationDate: edu.graduationDate || ''
+      })),
       skills: (data.skills || []).map(skill => ({
-        ...skill,
+        category: skill.category || '',
         items: Array.isArray(skill.items) 
-          ? skill.items 
+          ? skill.items.filter((item): item is string => typeof item === 'string')
           : typeof skill.items === 'string'
-            ? (skill.items as string).split(',').map(item => item.trim()).filter(Boolean)
+            ? (skill.items as string).split(',').map((item: string) => item.trim()).filter(Boolean)
             : []
       }))
     };
-    setResumeData(sanitizedData);
-    setIsDirty(false);
   };
+
+  // Update resume with validation
+  const updateResume = (data: ResumeData) => {
+    if (!isInitialized) return;
+
+    try {
+      const sanitizedData = validateResumeData(data);
+      setResumeData(sanitizedData);
+      setIsDirty(false);
+    } catch (error) {
+      console.error('Error updating resume:', error);
+    }
+  };
+
+  // Don't render children until initialized
+  if (!isInitialized) {
+    return null;
+  }
 
   return (
     <ResumeContext.Provider value={{ resumeData, updateResume, isDirty, setIsDirty }}>
