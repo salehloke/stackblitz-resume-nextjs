@@ -5,88 +5,131 @@ import ResumeStyle3 from '../components/resume-style-3';
 
 const resumeData = {
   "contactInformation": {
-    "fullName": "John Doe",
-    "phone": "+1 123-456-7890",
-    "email": "john.doe@example.com",
-    "linkedIn": "https://www.linkedin.com/in/johndoe",
-    "portfolio": "https://johndoe.dev",
+    "fullName": "Salehuddin Loke Bin Asri Loke",
+    // "phone": "+60 17‑205‑7149",
+    // "email": "lokesaleh@gmail.com",
+    "linkedIn": "",
+    "portfolio": "",
     "location": {
-      "city": "San Francisco",
-      "state": "California",
-      "country": "USA"
+      "city": "Bandar Enstek",
+      "state": "Negeri Sembilan",
+      "country": "Malaysia"
     }
   },
-  "professionalSummary": "Experienced software engineer with 5+ years of expertise in developing scalable web applications using modern technologies such as React, Node.js, and Docker. Passionate about creating intuitive user experiences and optimizing backend services.",
+  "professionalSummary": "Highly passionate and energetic Electrical‑Engineering graduate turned Front‑end Developer with a strong drive for continuous learning. Self‑taught in modern web technologies and known for proactive problem‑solving, effective communication, and solid time‑management skills. Experienced in Angular 15, state‑management with NgRx Component‑Store, and delivering production‑quality code within agile teams.",
   "keySkills": {
-    "programming": ["JavaScript", "TypeScript", "Python", "Go"],
-    "frameworks": ["React", "Next.js", "Node.js", "Express"],
-    "tools": ["Docker", "Kubernetes", "Git", "Jenkins", "CI/CD"],
-    "databases": ["PostgreSQL", "MongoDB", "Redis"]
+    "programming": ["HTML", "CSS", "JavaScript", "TypeScript", "C#"],
+    "frameworks": ["Angular 15", "RxJS (Observer pattern)", "Flutter (basic)", "React JS (basic)", "React Native (basic)", "Node.js (basic)"],
+    "tools": ["Nx Monorepo", "Jest (unit testing)", "Bootstrap", "Material UI", "Git", "Redmine"],
+    "databases": ["MSSQL"]
   },
   "professionalExperience": [
     {
-      "jobTitle": "Senior Software Engineer",
-      "companyName": "Tech Solutions Inc.",
-      "startDate": "2020-06",
+      "jobTitle": "Frontend Developer",
+      "companyName": "Tranglo Sdn. Bhd., Kuala Lumpur",
+      "startDate": "2021-08",
       "endDate": "Present",
       "responsibilities": [
-        "Designed and implemented a microservices architecture, reducing system downtime by 25%.",
-        "Led a team of 5 engineers to deliver a feature-rich web application with 10,000+ daily active users.",
-        "Optimized API performance, improving response times by 40%."
+        "Lead and mentor a team of 2 front‑end developers, performing code reviews and enforcing best practices.",
+        "Plan sprint scope and deliverables in an agile environment, collaborating closely with product, QA, and project management.",
+        "Review and improve UX wire‑frames to maintain a user‑centric design focus.",
+        "Introduced an online‑IDE–based onboarding programme that reduced developer ramp‑up time.",
+        "Standardised NgRx Component‑Store usage and improved BE–FE integration workflows."
       ]
     },
     {
       "jobTitle": "Software Engineer",
-      "companyName": "Innovatech",
-      "startDate": "2017-05",
-      "endDate": "2020-05",
+      "companyName": "Aimflex Systems Sdn. Bhd., Johor Bahru",
+      "startDate": "2019-07",
+      "endDate": "2021-07",
       "responsibilities": [
-        "Developed a React-based front-end application used by 50,000 users.",
-        "Collaborated with cross-functional teams to integrate third-party APIs and services.",
-        "Implemented CI/CD pipelines, reducing deployment time by 30%."
+        "Full‑stack developer for multiple internal systems (HR, Claims, Project Management, Quotation, Manufacturing, Service Reports).",
+        "Handled requirements, UI design, development, UAT and maintenance in a waterfall SDLC.",
+        "Built Windows services for email notifications, PDF barcode printing and OCR.",
+        "Introduced Flutter and led development of an online Service Report mobile app.",
+        "Worked remotely while maintaining timely delivery tracked via Redmine."
+      ]
+    },
+    {
+      "jobTitle": "Game Developer (Internship)",
+      "companyName": "Techcare Innovation, Johor",
+      "startDate": "2018-01",
+      "endDate": "2018-03",
+      "responsibilities": [
+        "Developed a Unity‑based rehabilitation game that interfaced with a custom balance‑board API.",
+        "Project won Merit at the Asian Pacific ICT Awards 2018 and became a finalist at Youth Innovation & Showcase Awards 2019."
       ]
     }
   ],
   "education": [
     {
-      "degree": "Bachelor of Science in Computer Science",
-      "institutionName": "University of California, Berkeley",
-      "graduationDate": "2017-05",
-      "achievements": ["Graduated with Honors", "GPA: 3.8/4.0"]
+      "degree": "Bachelor of Electrical Engineering (Mechatronic)",
+      "institutionName": "Universiti Teknologi Malaysia",
+      "graduationDate": "2019-07",
+      "achievements": [
+        "CGPA 3.26",
+        "Featured in UTM News for APICTA 2018 Merit and Youth Innovation 2019 finalist",
+        "University volleyball representative (MASUM & SUKIPT)",
+        "Final‑year project: Badminton Agility Training System"
+      ]
+    },
+    {
+      "degree": "Diploma in Electrical Engineering (Mechatronic)",
+      "institutionName": "Universiti Teknologi Malaysia, Kuala Lumpur",
+      "graduationDate": "2016-07",
+      "achievements": [
+        "CGPA 3.34",
+        "Active member of Robotics Club and Hovercraft Innovation competition",
+        "UTM volleyball team participant"
+      ]
     }
   ],
   "certifications": [
-    "AWS Certified Solutions Architect",
-    "Certified Kubernetes Administrator (CKA)"
+    "UI/UX Design Training – Iverson (2022)",
+    "Google Cloud Professional Cloud Architect Bootcamp (2022)"
   ],
   "projects": [
     {
-      "name": "E-commerce Platform",
-      "description": "Developed a full-stack e-commerce platform with features like user authentication, product listings, and a payment gateway.",
-      "technologies": ["React", "Node.js", "MongoDB", "Stripe API"],
-      "outcomes": "Achieved 5,000 monthly active users within the first 3 months."
+      "name": "VR Game for Rehabilitation",
+      "description": "Unity‑based game integrating a balance‑board micro‑controller to gamify physiotherapy exercises.",
+      "technologies": ["Unity", "C#", "Custom Hardware API"],
+      "outcomes": "Merit award at Malaysia APICTA 2018 and Malaysia representative at Asia Pacific ICT Awards 2018."
     },
     {
-      "name": "Real-time Chat Application",
-      "description": "Built a real-time chat application supporting text, media, and group conversations.",
-      "technologies": ["Socket.IO", "React", "Redis"],
-      "outcomes": "Handled concurrent usage of 1,000+ active users with no latency issues."
+      "name": "Service Report Mobile App",
+      "description": "Flutter mobile application allowing technicians to create and submit service reports in real time.",
+      "technologies": ["Flutter", "Dart", "REST API"],
+      "outcomes": "Streamlined service reporting process and reduced paperwork for field engineers."
+    },
+    {
+      "name": "Google Form Clone (Proof of Concept)",
+      "description": "Angular POC demonstrating dynamic form creation and validation similar to Google Forms.",
+      "technologies": ["Angular 15", "RxJS", "Bootstrap"],
+      "outcomes": "Used internally to showcase UI improvements and coding standards."
     }
   ],
   "volunteerExperience": [
     {
-      "role": "Technical Mentor",
-      "organization": "Code for Good",
-      "description": "Mentored high school students in building projects for social good using Python and JavaScript.",
-      "startDate": "2019-01",
-      "endDate": "2021-12"
+      "role": "Vice‑President, Sports Club",
+      "organization": "Tranglo Sdn. Bhd.",
+      "description": "Organised sports events and fostered employee engagement across the company.",
+      "startDate": "2023-01",
+      "endDate": "2023-12"
+    },
+    {
+      "role": "Industry Speaker",
+      "organization": "CAIRO UTM",
+      "description": "Gave a talk titled “The Importance of Identity Capital” to university students.",
+      "startDate": "2022-09",
+      "endDate": "2022-09"
     }
   ],
   "additionalInformation": {
-    "languages": ["English (Native)", "Spanish (Intermediate)"],
-    "hobbies": ["Hiking", "Photography", "Open-source Contributions"]
+    "languages": ["English (Well‑written & spoken)", "Bahasa Melayu (Excellent)"],
+    "hobbies": ["Volleyball", "Innovation Competitions", "Learning new frameworks"]
   }
 };
+
 
 export default function ViewResume() {
   return (

@@ -41,6 +41,7 @@ const defaultResumeData: ResumeData = {
 interface ResumeContextType {
   resumeData: ResumeData;
   updateResume: (data: ResumeData) => void;
+  saveResume: (data: ResumeData) => void;
   isDirty: boolean;
   setIsDirty: (dirty: boolean) => void;
 }
@@ -121,13 +122,60 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
+  // Save resume to MongoDB
+  const saveResume = async (data: ResumeData) => {
+    try {
+      const response = await fetch('/api/resume', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to save resume');
+      }
+
+      const savedResume = await response.json();
+      setResumeData(savedResume);
+      setIsDirty(false);
+    } catch (error) {
+      console.error('Error saving resume:', error);
+    }
+  };
+
+  // Fetch resume from MongoDB on mount
+  useEffect(() => {
+    const fetchResume = async () => {
+      try {
+        const response = await fetch('/api/resume');
+        if (response.ok) {
+          const data = await response.json();
+          if (data) {
+            setResumeData(data);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching resume:', error);
+        // Fallback to local storage if API fails
+        const stored = useLocalStorage<ResumeData>('resumeData', defaultResumeData);
+        if (stored) {
+          setResumeData(stored);
+        }
+      }
+    };
+
+    fetchResume();
+  }, []);
+
   // Don't render children until initialized
   if (!isInitialized) {
     return null;
   }
 
   return (
-    <ResumeContext.Provider value={{ resumeData, updateResume, isDirty, setIsDirty }}>
+    <ResumeContext.Provider value={{ resumeData, updateResume, saveResume, isDirty, setIsDirty }}>
       {children}
     </ResumeContext.Provider>
   );
