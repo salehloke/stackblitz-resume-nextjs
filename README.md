@@ -29,6 +29,35 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## Docker
+
+To build and run this project with Docker Compose:
+
+```bash
+# Build and start the app
+docker-compose up --build
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+Environment variables can be set in the `.env` file at the root of the project. See the default `.env` for an example.
+
+---
+
+To build and run manually with Docker:
+
+```bash
+# Build the image
+docker build -t my-resume .
+
+# Run the container
+docker run --env-file .env -p 3000:3000 my-resume
+```
+
+The app will be available at [http://localhost:3000](http://localhost:3000).
+
+Environment variables can be set in the `.env` file at the root of the project. See the default `.env` for an example.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.

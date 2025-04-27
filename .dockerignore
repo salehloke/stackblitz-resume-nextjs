@@ -1,0 +1,8 @@
+# Node modules and build output
+node_modules
+.next
+out
+dist
+.env
+Dockerfile
+.dockerignore

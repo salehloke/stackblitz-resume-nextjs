@@ -158,11 +158,6 @@ export function ResumeProvider({ children }: { children: React.ReactNode }) {
         }
       } catch (error) {
         console.error('Error fetching resume:', error);
-        // Fallback to local storage if API fails
-        const stored = useLocalStorage<ResumeData>('resumeData', defaultResumeData);
-        if (stored) {
-          setResumeData(stored);
-        }
       }
     };
 
